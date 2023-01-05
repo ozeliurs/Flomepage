@@ -1,1 +1,3 @@
 .idea
+db.sqlite
+secret_key.txt
