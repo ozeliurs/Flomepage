@@ -55,7 +55,7 @@ class Widget:
                 </div>"""
             )
 
-        return f"""<div class="elem cve"><h4>CVEs{" (" + self.config["min_score"] + "+)" if "min_score" in self.config else ""}</h4>{"<hr>".join(cve_list)}</div>"""
+        return f"""<div class="elem cve"><h4>CVEs{" (" + str(self.config["min_score"]) + "+)" if "min_score" in self.config else ""}</h4>{"<hr>".join(cve_list)}</div>"""
 
     def render_xkcd(self):
         req = requests.get("https://xkcd.com/info.0.json")
