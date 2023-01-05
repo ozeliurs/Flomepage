@@ -55,7 +55,7 @@ class Widget:
                 </div>"""
             )
 
-        return f"""<div class="elem cve">{"<hr>".join(cve_list)}</div>"""
+        return f"""<div class="elem cve"><h4>CVEs{" (" + self.config["min_score"] + "+)" if "min_score" in self.config else ""}</h4>{"<hr>".join(cve_list)}</div>"""
 
     def render_xkcd(self):
         req = requests.get("https://xkcd.com/info.0.json")
@@ -70,7 +70,6 @@ class Widget:
         </div>"""
 
     def render_ip(self):
-        # use javascript and https://ipapi.co/json/ to get ip
         return """<div class="elem ip">
             <h4><span id="ip">IP</span>  <img id="flag" style="height: 1.5rem"></h3>
             <p style="margin: 0;"><span id="city">Country</span>, <span id="region">Region</span></p>
