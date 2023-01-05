@@ -4,7 +4,7 @@
     <form action="#" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <label>
-            <textarea name="config" cols="30" rows="{{ config.split("\n") | length }}">{{ config }}</textarea>
+            <textarea name="config" cols="30" rows="{{ config.split("\n") | length }}" maxlength="10240">{{ config }}</textarea>
         </label>
         <input type="submit" value="Submit">
     </form>
