@@ -65,8 +65,8 @@ class Widget:
 
         xkcd = req.json()
         return f"""<div class="elem xkcd">
-            <h3>{xkcd['title']}</h3>
-            <img src="{xkcd['img']}" alt="{xkcd['alt']}" />
+            <h4>{xkcd['title']}</h4>
+            <a href="https://xkcd.com/{xkcd['num']}"><img src="{xkcd['img']}" alt="{xkcd['alt']}" /></a>
         </div>"""
 
     def render_ip(self):
