@@ -2,6 +2,16 @@
 
 {% block title %}{% endblock %}
 
+{% block head %}
+    {% if config.theme_color %}
+        <style>
+            :root {
+                --color-primary: {{ config.theme_color }};
+            }
+        </style>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <div class="row">
         {% for column in config.columns %}
