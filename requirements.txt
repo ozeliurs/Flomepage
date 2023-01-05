@@ -1,0 +1,5 @@
+flask
+Flask-SQLAlchemy
+Werkzeug
+requests
+Flask-WTF

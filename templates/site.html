@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flomepage - {% block title %}{% endblock %}</title>
+    <link href="{{ url_for("static", filename="css/styles.css") }}" type="text/css" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/347fb160d3.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{{ url_for("static", filename="favicon/favicon.png") }}">
+    <script async defer data-website-id="3db0468f-4849-4fb8-9d7f-ec16bc7f9048"
+            src="https://umami.ozeliurs.com/umami.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<nav class="nav bg-light-primary">
+    <div class="nav-left">
+        <a class="brand" href="/">Flomepage</a>
+        <div class="tabs">
+            <a href="/edit_config">Edit Config</a>
+        </div>
+    </div>
+    <div class="nav-center"></div>
+    <div class="nav-right">
+        {% if "user" in session and session["user"] is not none %}
+            <a class="hide-xs hide-sm">Hi {{ session["username"] }} !</a>
+            <a href="/logout" class="button primary">Logout</a>
+        {% else %}
+            <a href="/register" class="button">Register</a>
+            <a href="/login" class="button outline">Login</a>
+        {% endif %}
+    </div>
+</nav>
+<main class="container" style="margin-top: 10px">
+    {% block content %}
+    {% endblock %}
+</main>
+<footer class="is-center bg-light-primary">
+    <p>Flomepage v.{{ version }}</p>
+</footer>
+</body>
+</html>
+
+
+
+

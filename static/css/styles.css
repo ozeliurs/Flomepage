@@ -1,0 +1,65 @@
+@import url("https://unpkg.com/chota@latest");
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+nav, footer {
+    flex: 0 0 auto;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    min-height: 100px;
+}
+
+caption {
+    display: none;
+}
+
+i {
+    padding: 20px 10px;
+}
+
+.random-bg {
+    background-image: url("https://source.unsplash.com/random/1920x1080");
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-blend-mode: lighten;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.elem {
+    width: 100%;
+    border: gray solid 1px;
+    border-radius: 7px;
+    margin: 5px;
+}
+
+.link {
+    padding: 15px;
+    display: flex;
+    justify-content: left;
+}
+
+.xkcd {
+    padding: 5px;
+}
+
+.cve {
+    padding: 5px;
+}
+
+.ip {
+    padding: 5px;
+}

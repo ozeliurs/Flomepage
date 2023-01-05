@@ -1,0 +1,11 @@
+{% extends 'site.html' %}
+
+{% block content %}
+    <form action="#" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label>
+            <textarea name="config" cols="30" rows="{{ config.split("\n") | length }}">{{ config }}</textarea>
+        </label>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

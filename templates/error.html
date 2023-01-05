@@ -1,0 +1,15 @@
+{% extends 'site.html' %}
+
+{% block title %}Error {{ name }}{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-top: 10vh">
+        <div class="col-4">
+            <img src="https://http.cat/{{ code }}" alt="Error {{ code }} image with a cat :)">
+        </div>
+        <div class="col-8">
+            <h1>Oops! Something went wrong.</h1>
+            <h3>{{ message }}</h3>
+        </div>
+    </div>
+{% endblock %}
