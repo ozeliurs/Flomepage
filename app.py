@@ -33,7 +33,7 @@ with app.app_context():
 
 login_manager = login.LoginManager(User)
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 @app.errorhandler(werkzeug.exceptions.HTTPException)
@@ -90,6 +90,21 @@ def home():
         abort(500, "Invalid JSON")
         return
     return render_template('home.html', config=config)
+
+
+@app.get('/p/<username>')
+def homepage(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404, "User not found")
+        return
+    try:
+        config = json.loads(user.homepage_config)
+    except json.JSONDecodeError:
+        abort(500, "Invalid JSON")
+        return
+    return render_template('home.html', config=config)
+
 
 
 @app.get('/edit_config')
