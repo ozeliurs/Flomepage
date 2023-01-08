@@ -33,7 +33,7 @@ with app.app_context():
 
 login_manager = login.LoginManager(User)
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 
 @app.errorhandler(werkzeug.exceptions.HTTPException)
