@@ -27,22 +27,16 @@ class Widget:
         return f"""<a href="{self.config['link']}" class="elem link is-vertical-align" target="_blank" rel="nofollow"><i class="{self.config['icon']} fa-2xl"></i>{self.config['title']}</a>"""
 
     def render_cve(self):
-        kwargs = {"orderby": 1}
+        kwargs = {
+            "orderby": self.config["orderby"] if "orderby" in self.config else 1,
+            "numrows": self.config["limit"] if "limit" in self.config else 5,
+            "cvssscoremin": self.config["min_score"] if "min_score" in self.config else None,
+            "vendor_id": self.config["vendor_id"] if "vendor_id" in self.config else None,
+            "product_id": self.config["product"] if "product" in self.config else None,
+            "hasexp": self.config["has_exploit"] if "has_exploit" in self.config else None
+        }
 
-        if "limit" in self.config:
-            kwargs["numrows"] = self.config["limit"]
-
-        if "min_score" in self.config:
-            kwargs["cvssscoremin"] = self.config["min_score"]
-
-        if "vendor" in self.config:
-            kwargs["vendor_id"] = self.config["vendor_id"]
-
-        if "product" in self.config:
-            kwargs["product_id"] = self.config["product_id"]
-
-        if "has_exploit" in self.config:
-            kwargs["hasexp"] = self.config["has_exploit"]
+        kwargs = {k: v for k, v in kwargs.items() if v is not None}
 
         req = requests.get(f"https://www.cvedetails.com/json-feed.php?{urlencode(kwargs)}")
 
