@@ -99,7 +99,8 @@ class Widget:
                 <code class="small_p">{", ".join(site.name_servers)}</code>
                 
                 </div>""")
-            except whois.exceptions.WhoisPrivateRegistry:
-                domains.append(f"<div><h5>{domain}</h5><p>Invalid Domain</p></div>")
+            except Exception as e:
+                print(e)
+                domains.append(f"<div><h5>{domain}</h5><p>{e}</p></div>")
 
         return f"""<div class="elem domains"><h4>Domains</h4>{"<hr>".join(domains)}</div>"""
