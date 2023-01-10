@@ -7,6 +7,7 @@ ADD . /app
 
 RUN pip install gunicorn
 RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y whois
 
 EXPOSE 5000
 
