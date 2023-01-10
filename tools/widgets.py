@@ -101,6 +101,6 @@ class Widget:
                 </div>""")
             except Exception as e:
                 print(e)
-                domains.append(f"<div><h5>{domain}</h5><p>{e}</p></div>")
+                domains.append(f"""<div><h5>{domain}</h5><p class="small_p">{e}</p></div>""")
 
         return f"""<div class="elem domains"><h4>Domains</h4>{"<hr>".join(domains)}</div>"""
