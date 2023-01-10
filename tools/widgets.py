@@ -90,17 +90,16 @@ class Widget:
         domains = []
 
         for domain in self.config["domains"]:
-            site = whois.query(domain)
+            try:
+                site = whois.query(domain)
 
-            domains.append(f"""<div>
-            <p><span class="h5">{site.name}</span> <span class="tag is-small">{site.registrar}</span></p>
-            <p><code class="tag is-small">{site.creation_date}</code> to <code style="margin-left: 0px" class="tag is-small">{site.expiration_date}</code></p>
-            <code class="small_p">{", ".join(site.name_servers)}</code>
-            
-            </div>""")
-            print(site.expiration_date)
-            print(site.name_servers)
-            print(site.status)
-            print(site.registrant)
+                domains.append(f"""<div>
+                <p><span class="h5">{site.name}</span> <span class="tag is-small">{site.registrar}</span></p>
+                <p><code class="tag is-small">{site.creation_date}</code> to <code style="margin-left: 0px" class="tag is-small">{site.expiration_date}</code></p>
+                <code class="small_p">{", ".join(site.name_servers)}</code>
+                
+                </div>""")
+            except whois.exceptions:
+                domains.append(f"<div><h5>{domain}</h5><p>Invalid Domain</p></div>")
 
         return f"""<div class="elem domains"><h4>Domains</h4>{"<hr>".join(domains)}</div>"""
