@@ -2,6 +2,8 @@ import requests
 
 from urllib.parse import urlencode
 
+import whois
+
 
 class Widget:
     def __init__(self, config):
@@ -16,6 +18,8 @@ class Widget:
             return self.render_xkcd()
         elif self.config["type"] == "ip":
             return self.render_ip()
+        elif self.config["type"] == "domains":
+            return self.render_domains()
         else:
             return """<div class="elem-link is-vertical-align"><i class="fas fa-exclamation-triangle fa-2xl"></i>Invalid Widget Type</div>"""
 
@@ -71,7 +75,7 @@ class Widget:
 
     def render_ip(self):
         return """<div class="elem ip">
-            <h4><span id="ip">IP</span>  <img id="flag" style="height: 1.5rem"></h3>
+            <h4><span id="ip">IP</span>  <img id="flag" style="height: 1.5rem"></h4>
             <p style="margin: 0;"><span id="city">Country</span>, <span id="region">Region</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
         </div>
@@ -87,3 +91,22 @@ class Widget:
                     document.getElementById("flag").src = `https://flagcdn.com/64x48/${data.country_code.toLowerCase()}.png`;
                 });
         </script>"""
+
+    def render_domains(self):
+        domains = []
+
+        for domain in self.config["domains"]:
+            site = whois.query(domain)
+
+            domains.append(f"""<div>
+            <p><span class="h5">{site.name}</span> <span class="tag is-small">{site.registrar}</span></p>
+            <p><code class="tag is-small">{site.creation_date}</code> to <code style="margin-left: 0px" class="tag is-small">{site.expiration_date}</code></p>
+            <code class="small_p">{", ".join(site.name_servers)}</code>
+            
+            </div>""")
+            print(site.expiration_date)
+            print(site.name_servers)
+            print(site.status)
+            print(site.registrant)
+
+        return f"""<div class="elem domains"><h4>Domains</h4>{"<hr>".join(domains)}</div>"""

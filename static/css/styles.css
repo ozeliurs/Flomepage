@@ -34,6 +34,10 @@ i {
     background-blend-mode: lighten;
 }
 
+.small_p {
+    font-size: 0.6em;
+}
+
 .column {
     display: flex;
     flex-direction: column;
@@ -57,9 +61,13 @@ i {
 }
 
 .cve {
-    padding: 5px;
+    padding: 10px;
 }
 
 .ip {
-    padding: 5px;
+    padding: 10px;
+}
+
+.domains {
+    padding: 10px;
 }
