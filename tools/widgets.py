@@ -1,3 +1,5 @@
+import subprocess
+
 import requests
 
 from urllib.parse import urlencode
@@ -20,6 +22,8 @@ class Widget:
             return self.render_ip()
         elif self.config["type"] == "domains":
             return self.render_domains()
+        elif self.config["type"] == "ping":
+            return self.render_ping()
         else:
             return """<div class="elem-link is-vertical-align"><i class="fas fa-exclamation-triangle fa-2xl"></i>Invalid Widget Type</div>"""
 
@@ -104,3 +108,15 @@ class Widget:
                 domains.append(f"""<div><h5>{domain}</h5><p class="small_p">{e}</p></div>""")
 
         return f"""<div class="elem domains"><h4>Domains</h4>{"<hr>".join(domains)}</div>"""
+
+    def render_ping(self):
+        # use subprocess to ping
+        req = subprocess.run(["ping", "-c", "1", self.config["ip"]],
+                             stdout=subprocess.PIPE)
+
+        # if ping fails, return error
+        if req.returncode != 0:
+            return f"""<a href="https://{self.config['ip']}/" class="elem ping is-vertical-align" target="_blank" rel="nofollow"><i class="fas fa-xmark fa-2xl"></i>{self.config['ip']}</a>"""
+
+        latency = req.stdout.splitlines()[-1].decode().split(" ")[-2].split("/")[1]
+        return f"""<a href="https://{self.config['ip']}/" class="elem ping is-vertical-align" target="_blank" rel="nofollow"><i class="fas fa-check fa-2xl"></i>{self.config['ip']} ({latency} ms)</a>"""

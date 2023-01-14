@@ -71,3 +71,9 @@ i {
 .domains {
     padding: 10px;
 }
+
+.ping {
+    padding: 15px;
+    display: flex;
+    justify-content: left;
+}
