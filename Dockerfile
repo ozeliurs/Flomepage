@@ -7,7 +7,7 @@ ADD . /app
 
 RUN pip install gunicorn
 RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install -y whois
+RUN apt-get update && apt-get install -y whois iputils-ping
 
 EXPOSE 5000
 
