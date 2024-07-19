@@ -78,15 +78,15 @@ class Widget:
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
         </div>
         <script>
-            fetch("https://ipapi.co/json/")
+            fetch("http://ip-api.com/json/")
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("ip").innerHTML = data.ip;
+                    document.getElementById("ip").innerHTML = data.query;
                     document.getElementById("city").innerHTML = data.city;
                     document.getElementById("region").innerHTML = data.region;
                     document.getElementById("org").innerHTML = data.org;
-                    document.getElementById("asn").innerHTML = data.asn;
-                    document.getElementById("flag").src = `https://flagcdn.com/64x48/${data.country_code.toLowerCase()}.png`;
+                    document.getElementById("asn").innerHTML = data.as;
+                    document.getElementById("flag").src = `https://flagcdn.com/64x48/${data.countryCode.toLowerCase()}.png`;
                 });
         </script>"""
 
