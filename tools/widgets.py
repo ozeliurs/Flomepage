@@ -79,6 +79,10 @@ class Widget:
             <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem"></h4>
             <p style="margin: 0;"><span id="city">Country</span>, <span id="region">Region</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
+            <div class="row">
+                <a class="button primary outline col" href="https://iknowwhatyoudownload.com/en/peer/?ip=""" + ip + """ ">IKWYD</a>
+                <a class="button primary outline col" href="https://check.spamhaus.org/results?query=""" + ip + """ ">Spamhaus</a>
+            </div>
         </div>
         <script>
             fetch(`http://ip-api.com/json/""" + ip + """?fields=66846719`)
