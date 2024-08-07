@@ -74,13 +74,14 @@ class Widget:
         </div>"""
 
     def render_ip(self):
+        ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
         return """<div class="elem ip">
-            <h4><span id="ip">""" + request.remote_addr + """</span>  <img id="flag" style="height: 1.5rem"></h4>
+            <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem"></h4>
             <p style="margin: 0;"><span id="city">Country</span>, <span id="region">Region</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
         </div>
         <script>
-            fetch(`http://ip-api.com/json/""" + request.remote_addr + """?fields=66846719`)
+            fetch(`http://ip-api.com/json/""" + ip + """?fields=66846719`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("city").innerHTML = data.city;
