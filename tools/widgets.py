@@ -4,6 +4,8 @@ import requests
 
 from urllib.parse import urlencode
 
+from flask import request
+
 import whois
 
 
@@ -73,24 +75,19 @@ class Widget:
 
     def render_ip(self):
         return """<div class="elem ip">
-            <h4><span id="ip">IP</span>  <img id="flag" style="height: 1.5rem"></h4>
+            <h4><span id="ip">""" + request.remote_addr + """</span>  <img id="flag" style="height: 1.5rem"></h4>
             <p style="margin: 0;"><span id="city">Country</span>, <span id="region">Region</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
         </div>
         <script>
-            fetch("http://checkip.amazonaws.com/")
-                .then(response => response.text())
+            fetch(`http://ip-api.com/json/""" + request.remote_addr + """?fields=66846719`)
+                .then(response => response.json())
                 .then(data => {
-                    document.getElementById("ip").innerHTML = data.trim();
-                    fetch(`http://ip-api.com/json/${data.trim()}?fields=66846719`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById("city").innerHTML = data.city;
-                            document.getElementById("region").innerHTML = data.region;
-                            document.getElementById("org").innerHTML = data.org;
-                            document.getElementById("asn").innerHTML = data.as;
-                            document.getElementById("flag").src = `https://flagcdn.com/64x48/${data.countryCode.toLowerCase()}.png`;
-                        });
+                    document.getElementById("city").innerHTML = data.city;
+                    document.getElementById("region").innerHTML = data.region;
+                    document.getElementById("org").innerHTML = data.org;
+                    document.getElementById("asn").innerHTML = data.as;
+                    document.getElementById("flag").src = `https://flagcdn.com/64x48/${data.countryCode.toLowerCase()}.png`;
                 });
         </script>"""
 
