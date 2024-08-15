@@ -15,7 +15,7 @@ i2p_db = None
 def get_i2p():
     global i2p_db
     if i2p_db is None:
-        i2p_db = EasyI2L.download(I2LDB.DB11LITEBIN).load()
+        i2p_db = EasyI2L.download(I2LDB.DB3LITEBIN).load()
     return i2p_db
 
 
