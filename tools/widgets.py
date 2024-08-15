@@ -8,6 +8,16 @@ from flask import request
 
 import whois
 
+from easyi2l import EasyI2L, I2LDB
+
+i2p_db = None
+
+def get_i2p():
+    global i2p_db
+    if i2p_db is None:
+        i2p_db = EasyI2L.download(I2LDB.DB11LITEBIN).load()
+    return i2p_db
+
 
 class Widget:
     def __init__(self, config):
@@ -75,9 +85,10 @@ class Widget:
 
     def render_ip(self):
         ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+        ip_info = get_i2p().get_all(ip)
         return """<div class="elem ip">
-            <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem"></h4>
-            <p style="margin: 0;"><span id="city">Country</span>, <span id="region">Region</span></p>
+            <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem" href="https://flagcdn.com/64x48/""" + ip_info.country_short + """.png"></h4>
+            <p style="margin: 0;"><span id="city">""" + ip_info.city + """</span>, <span id="region">""" + ip_info.region + """</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
             <div class="row">
                 <a class="button primary outline col" href="https://iknowwhatyoudownload.com/en/peer/?ip=""" + ip + """ ">IKWYD</a>
@@ -88,11 +99,8 @@ class Widget:
             fetch(`http://ip-api.com/json/""" + ip + """?fields=66846719`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("city").innerHTML = data.city;
-                    document.getElementById("region").innerHTML = data.region;
                     document.getElementById("org").innerHTML = data.org;
                     document.getElementById("asn").innerHTML = data.as;
-                    document.getElementById("flag").src = `https://flagcdn.com/64x48/${data.countryCode.toLowerCase()}.png`;
                 });
         </script>"""
 

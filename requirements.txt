@@ -1,6 +1,9 @@
-flask
-Flask-SQLAlchemy
+flask==3.0.3
+Flask-SQLAlchemy==3.1.1
 Werkzeug
-requests
-Flask-WTF
-whois
+requests==2.32.3
+Flask-WTF==1.2.1
+whois==1.20240129.2
+IP2Location
+tqdm
+python-dotenv
