@@ -58,7 +58,7 @@ class EasyI2L:
 
         # Check if the response is a zip file
         if response.headers.get('Content-Type') != 'application/zip':
-            raise ValueError(f"Expected a zip file, but got {response.headers.get('Content-Type')}")
+            raise ValueError(f"Expected a zip file, but got {response.headers.get('Content-Type')}\n\tUrl: {url}\n\tCode: {response.status_code}\n\tContent: {response.content}")
 
         if response.status_code == 200:
             total_size = int(response.headers.get('content-length', 0))
