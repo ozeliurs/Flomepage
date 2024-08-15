@@ -87,7 +87,7 @@ class Widget:
         ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
         ip_info = get_i2p().get_all(ip)
         return """<div class="elem ip">
-            <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem" href="https://flagcdn.com/64x48/""" + ip_info.country_short.lower() + """.png"></h4>
+            <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem" src="https://flagcdn.com/64x48/""" + ip_info.country_short.lower() + """.png"></h4>
             <p style="margin: 0;"><span id="city">""" + ip_info.city + """</span>, <span id="region">""" + ip_info.region + """</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
             <div class="row">
