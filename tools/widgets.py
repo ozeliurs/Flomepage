@@ -88,7 +88,7 @@ class Widget:
         ip_info = get_i2p().get_all(ip)
         return """<div class="elem ip">
             <h4><span id="ip">""" + ip + """</span>  <img id="flag" style="height: 1.5rem" src="https://flagcdn.com/64x48/""" + ip_info.country_short.lower() + """.png"></h4>
-            <p style="margin: 0;"><span id="city">""" + ip_info.city + """</span>, <span id="region">""" + ip_info.region + """</span></p>
+            <p style="margin: 0;"><span id="city">""" + ip_info.city + """</span>, <span id="region">""" + ip_info.country_long + """</span></p>
             <p><span id="org">Organization</span> - <span id="asn">ASN</span></p>
             <div class="row">
                 <a class="button primary outline col" href="https://iknowwhatyoudownload.com/en/peer/?ip=""" + ip + """ ">IKWYD</a>
