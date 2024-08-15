@@ -1,5 +1,6 @@
 import enum
 import os
+import shutil
 import zipfile
 from pathlib import Path
 
@@ -82,7 +83,7 @@ class EasyI2L:
                         print(f"Extracted {file_info.filename}")
 
                         extracted_file = Path(file_info.filename)
-                        extracted_file.rename(db_folder / extracted_file.name)
+                        shutil.move(str(extracted_file), str(db_folder / extracted_file.name))
                         print(f"Moved {extracted_file.name} to {db_folder}")
 
             print(f"Downloaded and extracted {database_code['code']}.zip")
