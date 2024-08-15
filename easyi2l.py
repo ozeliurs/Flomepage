@@ -56,6 +56,10 @@ class EasyI2L:
         url = IP2LOCATION_URL.format(TOKEN=IP2LOCATION_TOKEN, DATABASE_CODE=database_code["code"])
         response = requests.get(url, stream=True)
 
+        # Check if the response is a zip file
+        if response.headers.get('Content-Type') != 'application/zip':
+            raise ValueError(f"Expected a zip file, but got {response.headers.get('Content-Type')}")
+
         if response.status_code == 200:
             total_size = int(response.headers.get('content-length', 0))
             chunk_size = 1024
