@@ -15,7 +15,8 @@ app = Flask(__name__)
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-Path("persistent").mkdir(parents=True, exist_ok=True)
+persistent_path = Path("persistent")
+persistent_path.mkdir(parents=True, exist_ok=True)
 
 secret_key = Path("persistent/secret_key.txt")
 
@@ -25,7 +26,7 @@ else:
     app.secret_key = "".join(secrets.choice(string.ascii_letters + string.digits) for _ in range(32))
     secret_key.write_text(app.secret_key)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///persistent/db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + (persistent_path / "db.sqlite").absolute().as_posix()
 db.init_app(app)
 
 with app.app_context():
